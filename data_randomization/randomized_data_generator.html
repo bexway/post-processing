@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+    <script src="jspsych-5.0.3/jspsych.js"></script> 
+    <script src="jspsych-5.0.3/plugins/jspsych-text.js"></script>
+    <script src="jspsych-5.0.3/plugins/jspsych-survey-text.js"></script>
+    <script src="jspsych-5.0.3/plugins/jspsych-single-stim.js"></script> 
+    <script src="jspsych-5.0.3/plugins/jspsych-survey-likert.js"></script>
+    <script src="jspsych-5.0.3/plugins/jspsych-instructions.js"></script>
+    <script src="FileSaver.js-master/FileSaver.js"></script>  
+    <link rel="stylesheet" href="jspsych-5.0.3/css/jspsych.css"></link>
+    <!--<link rel="stylesheet" href="css/jquery-ui.css"></link>-->
+  </head>
+  <body>
+  </body>
+  <script>
+
+  experiment = [];
+
+
+    for(var x=0; x<100;x++){
+        var data_block = {
+            type: 'single-stim',
+            stimuli: [" "],
+            choices: ['none'],
+            timing_response: .001,
+            timing_post_trial: 0,
+            data: { TrialNumber: x+1, Subject:"s999", TrialType:Math.floor(Math.random() * 10), Response: Math.floor(Math.random() * 10), TestTrial:Math.floor(Math.random() * 10)},
+        };
+        experiment.push(data_block)
+    }
+
+
+    jsPsych.init({
+      display_element: $('#jspsych-target'),
+      timeline: experiment,
+      on_finish: function() {
+                  //jsPsych.data.displayData('csv');
+                  //if(!mturk){
+                  var dat = jsPsych.data.dataAsCSV();
+                  var blob = new Blob([dat], {type: "text/plain;charset=utf-8"});
+                  saveAs(blob, "s999.csv");
+                  //}
+                }
+    });
+
+
+  </script>
+</html>

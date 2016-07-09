@@ -1,9 +1,14 @@
-import Tkinter
+import Tkinter as tk
+import tkFileDialog
 from os import listdir
 from os.path import isfile, join
 import csv
 
-directory = "testdata3"
+# root = tk.Tk()
+# root.withdraw()
+# try directory = tkFileDialog.askopenfilename()
+
+directory = "data"
 onlyfiles = [f for f in listdir(directory) if isfile(join(directory, f))]
 
 # parametersfile = open('eventsparameters.csv', 'r')
